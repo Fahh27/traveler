@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plane, Mail, ArrowLeft, Send, CheckCircle } from 'lucide-react';
+import { Mail, ArrowLeft, Send, CheckCircle } from 'lucide-react';
 import Retour from '../components/retour';
 import Logo from "../assets/traveler-nobg.png";
 
@@ -8,13 +8,11 @@ function ForgotPassword() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = () => {
-    // Validation
     if (!email) {
       alert('Veuillez entrer votre adresse e-mail');
       return;
     }
 
-    // Validation format email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert('Veuillez entrer une adresse e-mail valide');
@@ -27,16 +25,14 @@ function ForgotPassword() {
   };
 
   const handleBackToLogin = () => {
-    // Redirection vers la page de connexion
     window.history.back();
-    // ou: window.location.href = '/login';
+
   };
 
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-300 to-blue-200 py-12 px-4">
         <div className="max-w-3xl mx-auto">
-          {/* En-tête */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg mb-4">
               <CheckCircle className="w-8 h-8 text-green-500" />
@@ -45,7 +41,6 @@ function ForgotPassword() {
             <p className="text-blue-50 text-lg">Vérifiez votre boîte de réception</p>
           </div>
 
-          {/* Message de confirmation */}
           <div className="bg-white rounded-2xl shadow-2xl p-8">
             <div className="text-center space-y-4">
               <div className="text-6xl mb-4">📧</div>
@@ -58,14 +53,17 @@ function ForgotPassword() {
                 Si vous ne recevez pas l'e-mail dans quelques minutes, vérifiez votre dossier spam.
               </p>
 
-            <div className="m-4 px-50 py-2 ">  
-              <button
-                onClick={handleBackToLogin}
-                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all shadow-lg hover:shadow-xl mt-6"
-              >
-                <ArrowLeft className="w-5 h-5" />
-                Retour à la connexion
-              </button></div>
+              <div className="m-4 px-50 py-2">
+                <div className='flex justify-center'>
+                  <button
+                    onClick={handleBackToLogin}
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all shadow-lg hover:shadow-xl mt-6"
+                  >
+                    <ArrowLeft className="w-5 h-5" />
+                    Retour à la connexion
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -76,7 +74,6 @@ function ForgotPassword() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-300 to-blue-200 py-12 px-4">
       <div className="max-w-3xl mx-auto">
-        {/* En-tête */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-50 bg-white rounded-full shadow-lg mb-4">
             <img src={Logo}  />
@@ -85,17 +82,14 @@ function ForgotPassword() {
           <p className="text-blue-50 text-lg">Pas de soucis, nous allons vous aider</p>
         </div>
 
-        {/* Formulaire */}
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="space-y-5">
-            {/* Instructions */}
             <div className="bg-blue-50 p-4 rounded-lg">
               <p className="text-gray-700 text-sm">
                 Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
               </p>
             </div>
 
-            {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                 <Mail className="inline w-4 h-4 mr-1" />
@@ -133,7 +127,6 @@ function ForgotPassword() {
           </div>
         </div>
 
-        {/* Info supplémentaire */}
         <div className="text-center mt-6">
           <p className="text-white text-sm">
             Vous vous souvenez de votre mot de passe ?{' '}
