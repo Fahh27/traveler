@@ -166,7 +166,6 @@ function SearchBar() {
 
   return (
     <>
-      {/* Bouton icône pour ouvrir le modal */}
       <button
         onClick={toggleSearch}
         className="rounded-full hover:bg-blue-100 transition-colors"
@@ -175,14 +174,10 @@ function SearchBar() {
         <Search className="w-6 h-6 text-blue-600" />
       </button>
 
-      {/* Modal de recherche */}
       {isOpen && (
         <>
-
-          {/* Modal */}
           <div className="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl z-50 overflow-y-auto">
             <div className="p-6">
-              {/* En-tête */}
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
                   <Search className="w-6 h-6 text-blue-600" />
@@ -196,7 +191,6 @@ function SearchBar() {
                 </button>
               </div>
 
-              {/* Formulaire de recherche */}
               <div className="space-y-4 mb-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -241,7 +235,6 @@ function SearchBar() {
                 </div>
               </div>
 
-              {/* Résultats */}
               <div>
                 <h3 className="text-lg font-bold text-gray-800 mb-3">
                   {filteredTravels.length} résultat{filteredTravels.length > 1 ? 's' : ''}
@@ -249,7 +242,6 @@ function SearchBar() {
 
                 {filteredTravels.length === 0 ? (
                   <div className="text-center py-8">
-                    {/* <div className="text-4xl mb-2">😢</div> */}
                     <p className="text-gray-500">Aucun voyage trouvé</p>
                   </div>
                 ) : (
