@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, X, MapPin, Calendar, Hotel } from 'lucide-react';
+import { Search, X, MapPin, Calendar, Hotel, Coins } from 'lucide-react';
 import React from 'react';
 
 interface Travel {
@@ -120,6 +120,8 @@ function SearchBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchDate, setSearchDate] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
   const [filteredTravels, setFilteredTravels] = useState<Travel[]>(mockTravels);
 
   const handleSearch = () => {
@@ -143,6 +145,26 @@ function SearchBar() {
       });
     }
 
+    if (minPrice && maxPrice && Number(minPrice) === Number(maxPrice)) {
+      results = results.filter(travel => travel.price === Number(minPrice))
+      
+    } else {
+      if (minPrice) {
+        results = results.filter(travel => travel.price >= Number(minPrice));
+      }
+
+      if (maxPrice) {
+        results = results.filter(travel => travel.price <= Number(maxPrice));
+      }
+    }
+    
+
+    if (minPrice && maxPrice && Number(minPrice) > Number(maxPrice)) {
+      alert("Le prix minimum ne peut pas être supérieur au prix maximum")
+      return;
+
+    }
+  
     setFilteredTravels(results);
   };
 
@@ -216,6 +238,37 @@ function SearchBar() {
                     value={searchDate}
                     onChange={(e) => setSearchDate(e.target.value)}
                     className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <Coins className="inline w-4 h-4 mr-1" />
+                    Budget
+                  </label>
+
+                  <label className= "block text-sm font-semibold text-gray-700 mb-2">
+                    Minimum
+                  </label>
+                  <input 
+                  type="number"
+                  step={100}
+                  min={0}
+                  value={minPrice}
+                  onChange={(e) => setMinPrice(e.target.value)}
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                  />
+                  
+                  <label className= "block text-sm font-semibold text-gray-700 mb-2">
+                    Maximum
+                  </label>
+                  <input 
+                  type="number"
+                  step={100}
+                  min={0}
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
                   />
                 </div>
 
