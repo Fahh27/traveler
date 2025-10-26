@@ -10,7 +10,6 @@ const Popup: React.FC = () => {
         Swal.fire({
             title: "Voulez-vous vraiment quitter cette page ?",
             icon: "question",
-
             showCancelButton: true,
             confirmButtonText: "Oui",
             cancelButtonText: "Annuler",
@@ -84,7 +83,7 @@ const Popup: React.FC = () => {
                     text: "custom-text",
                     image: "custom-image",
                     confirmButton: "custom-confirm-button",
-                    cancelButton: "custom-cancel-button",         
+                    cancelButton: "custom-cancel-button",
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
