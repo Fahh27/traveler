@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Plane, User, Lock, Eye, EyeOff, LogIn, ArrowLeft } from 'lucide-react';
+import { User, Lock, Eye, EyeOff, LogIn } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Retour from '../components/retour';
 import Logo from "../assets/traveler-nobg.png";
+import Swal from 'sweetalert2';
+import '/src/components/popup';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,27 +21,35 @@ export default function Login() {
   };
 
   const handleSubmit = () => {
-    // Validation
     if (!formData.identifier || !formData.password) {
       alert('Veuillez remplir tous les champs');
       return;
     }
 
     console.log('Connexion:', formData);
-    
-    // futur API ici maybe, idk
+        Swal.fire({
+          title: "Connexion réussie !",
+          icon: "success",
+          iconColor: "#ffff",
+          confirmButtonText: "OK",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          customClass: {
+            popup: "custom-popup",
+            title: "custom-title",
+            confirmButton: "custom-confirm-button",
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.history.back();
+          }
+        });
 
-    alert('Connexion réussie !');
-    
-    // Redirection après connexion
-    // window.location.href = '/dashboard';
   };
 
   const handleForgotPassword = (e: React.MouseEvent) => {
     e.preventDefault();
     alert('Fonctionnalité de récupération de mot de passe à implémenter');
-    // Redirection vers page de récupération
-    // window.location.href = '/forgot-password';
   };
 
   const handleRetour = () => {
@@ -52,7 +62,6 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-300 to-blue-200 py-12 px-4">
       <div className="max-w-3xl mx-auto">
-        {/* En-tête */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-50 bg-white rounded-full shadow-lg mb-4">
                       <img src={Logo}  />
@@ -61,10 +70,8 @@ export default function Login() {
           <p className="text-blue-50 text-lg">Connectez-vous à votre compte</p>
         </div>
 
-        {/* Formulaire */}
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="space-y-5">
-            {/* Nom d'utilisateur ou Email */}
             <div>
               <label htmlFor="identifier" className="block text-sm font-semibold text-gray-700 mb-2">
                 <User className="inline w-4 h-4 mr-1" />
@@ -81,7 +88,6 @@ export default function Login() {
               />
             </div>
 
-            {/* Mot de passe */}
             <div>
               <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
                 <Lock className="inline w-4 h-4 mr-1" />
@@ -107,7 +113,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Lien mot de passe oublié */}
             <div className="text-right">
               <Link
                 to="/forgot-password"
@@ -117,7 +122,6 @@ export default function Login() {
               </Link>
             </div>
 
-            {/* Bouton de connexion */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Retour />
 
@@ -134,7 +138,6 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Lien vers la page d'inscription */}
         <div className="text-center mt-6">
           <p className="text-white">
             Vous n'avez pas de compte ?{' '}
