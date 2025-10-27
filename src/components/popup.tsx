@@ -10,6 +10,7 @@ const Popup: React.FC = () => {
         Swal.fire({
             title: "Voulez-vous vraiment quitter cette page ?",
             icon: "question",
+            iconColor: "#fff",
             showCancelButton: true,
             confirmButtonText: "Oui",
             cancelButtonText: "Annuler",
@@ -19,7 +20,6 @@ const Popup: React.FC = () => {
                 popup: "custom-popup",
                 title: "custom-title",
                 text: "custom-text",
-                icon: "custom-image",
                 confirmButton: "custom-confirm-button",
                 cancelButton: "custom-cancel-button",         
             }
@@ -28,74 +28,53 @@ const Popup: React.FC = () => {
                 window.history.back();
                 
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire({
-                title: "Bienvenu(e) sur Traveler!",
-                text: "Veuillez vous connecter pour continuer.",
-                imageUrl: Logo,
-                imageWidth: 200,
-                imageHeight: 60,
-                imageAlt: "Logo Traveler",
-                showCancelButton: true,
-                confirmButtonText: "Se connecter",
-                cancelButtonText: "Quitter le site",
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                reverseButtons: true,
-                customClass: {
-                    popup: "custom-popup",
-                    title: "custom-title",
-                    text: "custom-text",
-                    image: "custom-image",
-                    confirmButton: "custom-confirm-button",
-                    cancelButton: "custom-cancel-button",         
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "/login";
-                
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    handleRetour();
-                }
-
-            });
             }
-        })
+    });
+        }
+
+    const showPopup = () => {
+        Swal.fire({
+            title: "Bienvenu(e) sur Traveler!",
+            text: "Veuillez vous connecter pour continuer.",
+            imageUrl: Logo,
+            imageWidth: 200,
+            imageHeight: 60,
+            imageAlt: "Logo Traveler",
+            showCancelButton: true,
+            confirmButtonText: "Se connecter",
+            cancelButtonText: "Quitter le site",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            reverseButtons: true,
+            customClass: {
+                popup: "custom-popup",
+                title: "custom-title",
+                text: "custom-text",
+                image: "custom-image",
+                confirmButton: "custom-confirm-button",
+                cancelButton: "custom-cancel-button",
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/login";
+            
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                handleRetour();
+            }
+
+        });
     }
 
+    // "censer" empêcher le pop up de revenir après connexion
     useEffect (() => {
-        if (window.location.pathname !== "/login") {
-            Swal.fire({
-                title: "Bienvenu(e) sur Traveler!",
-                text: "Veuillez vous connecter pour continuer.",
-                imageUrl: Logo,
-                imageWidth: 200,
-                imageHeight: 60,
-                imageAlt: "Logo Traveler",
-                showCancelButton: true,
-                confirmButtonText: "Se connecter",
-                cancelButtonText: "Quitter le site",
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                reverseButtons: true,
-                customClass: {
-                    popup: "custom-popup",
-                    title: "custom-title",
-                    text: "custom-text",
-                    image: "custom-image",
-                    confirmButton: "custom-confirm-button",
-                    cancelButton: "custom-cancel-button",
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "/login";
-                
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    handleRetour();
-                }
+        const isAuthenticated = !!localStorage.getItem("token");
+        const currentPath = window.location.pathname;
 
-            });
+        if (!isAuthenticated && currentPath !== "/login" && currentPath !== "/signin") {
+            showPopup();
         }
-    })
+        
+    }, []);
 
     return null;
 };
