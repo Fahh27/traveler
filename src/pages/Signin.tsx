@@ -1,51 +1,35 @@
 import React, { useState } from "react";
 import Logo from "../assets/traveler-nobg.png";
 import Field from "../components/champ";
-import { Eye, EyeOff, Lock, Mail, MapPin, Phone, User, UserPlus } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, MapPin, Phone, User, UserPen, UserPlus } from "lucide-react";
 import Retour from "../components/retour";
 import Swal from "sweetalert2";
 
 function Signin () {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    nom:'',
-    prenom: '',
-    telephone: '',
-    adresse: '',
-    email: '',
-    username: '',
-    password: '',
+  const [formData, setFormData] = useState({nom:'', prenom: '', telephone: '', adresse: '', email: '', username: '', password: '',
   });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = () => {
     const {nom, prenom, telephone, adresse, email, username, password} = formData;
-
     if (!nom || !prenom || !telephone || !adresse || !email || !username || !password) {
         return alert("Veuillez remplir les champs obligatoires");
     }
-
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return alert("Veuillez entrer une adresse valide");
     }
-
     if (!/^\+?[0-9\s\-]{7,15}$/.test(telephone)) {
         return alert("Veuillez entrer un numéro de téléphone valide");
     }
-
     if (!/^[a-zA-ZÀ-ÿ '-]+$/.test(nom) || !/^[a-zA-ZÀ-ÿ '-]+$/.test(prenom)) {
         return alert("Le nom et le prénom ne doivent contenir que des lettres");
     }
-
     if (password.length < 6) {
         return alert("Le mot de passe doit contenie au moins 6 caractères");
     }
-
     console.log("Données d\'inscription:", formData);
-    // alert("Inscription réussie !");
     Swal.fire({
       title: "Inscription réussie !",
       icon: "success",
@@ -76,12 +60,12 @@ function Signin () {
         <p className="text-blue-50 text-lg">Rejoignez-nous pour des des voyages inoubliables</p>
         </div>
       </div>
-
       <div className="bg-white rounded-2xl shadow-2xl p-8">
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Field
             label="Nom"
+            icon={UserPen}
             id="nom"
             name="nom"
             value={formData.nom}
@@ -90,6 +74,7 @@ function Signin () {
             />
             <Field
             label="Prénom"
+            icon={UserPen}
             id="prenom"
             name="prenom"
             value={formData.prenom}
@@ -97,7 +82,6 @@ function Signin () {
             placeholder="Votre prénom"
              />
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Field
             label="Téléphone"
@@ -119,7 +103,6 @@ function Signin () {
             placeholder="123 Rue de la Paix"
             />
           </div>
-
           <Field
           label="Email"
           icon={Mail}
@@ -140,14 +123,12 @@ function Signin () {
           placeholder="jean_dupont123"
           />
         </div>
-
         <div>
           <label htmlFor="password"
           className="block text-sm font-semibold text-gray-700 mb-2"
           >
             <Lock className="inline w-4 h-4 mr-1" /> Mot de passe *
           </label>
-
           <div className="relative">
             <input
             type={showPassword ? "text" : "password"}
@@ -158,7 +139,6 @@ function Signin () {
             placeholder="Minimum 6 caractères"
             className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors pr-12"
             />
-
             <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -167,11 +147,9 @@ function Signin () {
             { showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
             </button>
           </div>
-
           <div>
             <p className="text-xs text-gray-500 mt-1">Le mot de passe doit contenir au moins 6 caractères</p>
           </div>
-
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Retour />
             <button
@@ -182,7 +160,6 @@ function Signin () {
               <UserPlus className="w-5 h-5"/> S'inscrire
             </button>
           </div>
-
           <div className="text-center mt-6">
             <p className="text-white">
               Vous avez déjà un compte ? {' '}
@@ -191,7 +168,17 @@ function Signin () {
           </div>
         </div>        
       </div>
-
+      <div className="text-center mt-6">
+        <p className="text-white">
+          Vous avez déjà un compte ?{' '}
+          <a
+            href="/login"
+            className="font-bold text-white hover:text-blue-100 underline"
+          >
+            Se connecter
+          </a>
+        </p>
+      </div>
       <p className="text-center text-white text-sm mt-6">
         * Tous les champs son obligatoires
       </p>

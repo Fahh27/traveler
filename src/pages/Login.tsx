@@ -9,7 +9,7 @@ import '/src/components/popup';
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    identifier: '', // Peut être email ou username
+    identifier: '',
     password: ''
   });
 
@@ -50,13 +50,6 @@ export default function Login() {
   const handleForgotPassword = (e: React.MouseEvent) => {
     e.preventDefault();
     alert('Fonctionnalité de récupération de mot de passe à implémenter');
-  };
-
-  const handleRetour = () => {
-    if (confirm('Voulez-vous vraiment quitter la page de connexion ?')) {
-      window.history.back();
-
-    }
   };
 
   return (
