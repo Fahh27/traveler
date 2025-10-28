@@ -47,10 +47,10 @@ export default function Login() {
 
   };
 
-  const handleForgotPassword = (e: React.MouseEvent) => {
-    e.preventDefault();
-    alert('Fonctionnalité de récupération de mot de passe à implémenter');
-  };
+  // const handleForgotPassword = (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   alert('Fonctionnalité de récupération de mot de passe à implémenter');
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-300 to-blue-200 py-12 px-4">
