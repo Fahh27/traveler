@@ -28,6 +28,7 @@ const Popup: React.FC = () => {
                 window.history.back();
                 
             } else if (result.dismiss === Swal.DismissReason.cancel) {
+                showPopup();
             }
     });
         }
