@@ -1,12 +1,31 @@
 import {ArrowLeft } from 'lucide-react';
+import Swal from 'sweetalert2';
+import "../components/popup.css"
 
 function Retour() {
 
 const handleRetour = () => {
-    if (confirm('Voulez-vous vraiment quitter ce formulaire ?')) {
-      window.history.back();
-
-    }
+   Swal.fire({
+      text: "Voulez-vous vraiment quiiter cette page ?",
+      icon: "question",
+      iconColor: "#ffff",
+      showCancelButton: true,
+      confirmButtonText: "Oui",
+      cancelButtonText: "Non",
+      reverseButtons: true,
+      customClass: {
+        popup: "custom-popup",
+        text: "custom-text",
+        confirmButton: "custom-confirm-button",
+        cancelButton: "custom-cancel-button",
+      }
+    }).then((result) =>{
+      if (result.isConfirmed) {
+        window.history.back();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        window.close();
+      }
+    });
   };
 
     return (
